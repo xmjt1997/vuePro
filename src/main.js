@@ -19,6 +19,8 @@ Vue.use(Vant);
 
 Vue.config.productionTip = false
 
+
+
 Vue.filter('reglogin', (value) => {
 
 	let txtcont = "";
@@ -35,13 +37,12 @@ new Vue({
 
 	data() {
 		return {
-			cut: '1',
-			count: '',
-			newdatas: [],
+			addCount: true,
 			showH: true,
 			showF: true,
-			state: 'homeNews'
-
+			newId: '',
+			state: '',
+			cut: false
 		}
 	},
 	store,

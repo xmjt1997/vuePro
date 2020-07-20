@@ -93,7 +93,7 @@ export default {
       }
     },
     turn() {
-      this.$root.cut = 1;
+      this.$root.cut = true;
     },
   },
 };

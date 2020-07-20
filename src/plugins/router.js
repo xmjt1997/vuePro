@@ -16,6 +16,8 @@ import Preson from '@/layouts/Preson.vue'
 
 
 
+
+
 const routes = [
   { path: '/', redirect: '/home' },
   { path: '/home', component: Home },
@@ -26,7 +28,7 @@ const routes = [
         next('/preson')
       }
       else next()
-    }
+    },
   },
   { path: '/details/:id', component: Details },
   { path: '/society', component: Society },
@@ -37,7 +39,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

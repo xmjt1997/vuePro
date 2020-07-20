@@ -1,15 +1,15 @@
 <template>
   <div>
-    <van-search v-model="value" placeholder="请输入搜索关键词" shape="round" />
+    <van-search placeholder="请输入搜索关键词" shape="round" />
     <Banner></Banner>
-
-    <Content :data="newdatas"></Content>
-    <Paging :counts="count" @pag="newsPag" :urls="getUrl"></Paging>
+    <Content :newList="newList"></Content>
+    <Paging :num="count" @news="getList"></Paging>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+
 import Banner from "@/components/banner/banner.vue";
 import Content from "@/components/content/content.vue";
 import Paging from "@/components/pag/pag.vue";
@@ -18,11 +18,8 @@ export default {
   props: {},
   data() {
     return {
-      value: "",
-      count: "",
-      newdatas: [],
-      type: "top",
-      getUrl: "http://localhost/details/recreation",
+      newList: [],
+      count: 1,
     };
   },
   components: {
@@ -30,21 +27,30 @@ export default {
     Content,
     Paging,
   },
+  created() {
+    this.$root.state = "yuleNews";
+    sessionStorage.setItem("state", "yuleNews");
+
+    this.$root.showH = true;
+    this.$root.showF = true;
+  },
   mounted() {
-    axios({
-      url: "http://localhost/details/recreation",
-    }).then((data) => {
-      let a = data.data;
-      this.count = a.lastIndex;
-      this.newdatas = a.advList;
-      //  this.$store.dispatch("homeNews", [a.lastIndex, a.advList]);
-      this.$store.dispatch(this.$root.state, a.advList);
-    });
+    this.getNews();
   },
   updated() {},
   methods: {
-    newsPag(value) {
-      this.newdatas = value;
+    getList(value) {
+      this.newList = value;
+      sessionStorage.setItem("newList", "value");
+    },
+
+    getNews() {
+      axios({
+        url: "http://localhost/details/recreation",
+      }).then((data) => {
+        this.newList = data.data.advList;
+        this.count = data.data.lastIndex;
+      });
     },
   },
 };

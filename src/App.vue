@@ -29,27 +29,6 @@ export default {
   watch: {
     $route(to, form) {
       let path = to.path;
-
-      if (/home|society|inter|money|recreation/.test(path)) {
-        this.$root.showF = this.$root.showH = true;
-      } else {
-        this.$root.showH = this.$root.showF = false;
-      }
-      if (/home/.test(path)) {
-        this.$root.state = "homeNews";
-      }
-      if (/inter/.test(path)) {
-        this.$root.state = "interNews";
-      }
-      if (/money/.test(path)) {
-        this.$root.state = "moneyNews";
-      }
-      if (/society/.test(path)) {
-        this.$root.state = "societyNews";
-      }
-      if (/recreation/.test(path)) {
-        this.$root.state = "recreationNews";
-      }
     },
 
     deep: true,

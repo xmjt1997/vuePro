@@ -1,10 +1,10 @@
 <template>
   <div>
     <van-pagination
-      v-model="currentPage"
-      :page-count="counts"
+      v-model="pagcount"
+      :page-count="num"
       mode="simple"
-      @change="byID(currentPage)"
+      @change="getNews(pagcount)"
     />
   </div>
 </template>
@@ -12,25 +12,26 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["counts", "type", "urls"],
+  props: ["num"],
   data() {
     return {
-      currentPage: 1,
+      pagcount: 1,
     };
   },
   components: {},
   mounted() {},
   updated() {},
   methods: {
-    byID(value) {
+    getNews(value) {
+      let type = this.$route.path;
+      let str = type.slice(1);
       axios({
-        url: this.urls,
-        params: { _id: value },
+        //请求地址
+        url: "http://localhost/details/" + str,
+        params: { _id: value }, //当前页码数
       }).then((data) => {
-        let a = data.data;
-        // this.$root.newdatas = a.advList;
-        this.$emit("pag", a.advList);
-        this.$store.dispatch(this.$root.state, a.advList);
+        // console.log(data.data.advList);
+        this.$emit("news", data.data.advList);
       });
     },
   },

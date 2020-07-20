@@ -89,7 +89,8 @@ export default {
       }
     },
     turn() {
-      this.$root.cut = 0;
+      console.log("aaa");
+      this.$root.cut = false;
     },
   },
 };
