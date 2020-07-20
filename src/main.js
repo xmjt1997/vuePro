@@ -1,10 +1,50 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './plugins/router.js'
+import store from '@/plugins/vuex.js'
+import '@/assets/css/base.css'
+import '@/assets/js/base.js'
+
+// import Vant from 'vant'
+
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
+
+
+
+// Vue.use(Vant)
+
 
 Vue.config.productionTip = false
 
+Vue.filter('reglogin', (value) => {
+
+	let txtcont = "";
+	if (value == 0) {
+		txtcont = '登录界面'
+	} else {
+		txtcont = '注册界面'
+	}
+	return txtcont;
+})
+
+
 new Vue({
-  router,
-  render: h => h(App)
+
+	data() {
+		return {
+			cut: '1',
+			count: '',
+			newdatas: [],
+			showH: true,
+			showF: true,
+			state: 'homeNews'
+
+		}
+	},
+	store,
+	router,
+	render: h => h(App)
 }).$mount('#app')
