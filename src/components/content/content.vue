@@ -2,7 +2,7 @@
   <div>
     <van-card
       v-for="(item, index) in newList"
-      :key="index"
+      :key="item._id"
       :tag="item.category"
       :thumb="item.thumbnail_pic_s"
       @click="truns(item._id)"

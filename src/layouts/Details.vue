@@ -19,7 +19,12 @@
         </span>
       </template>
       <template #right-icon>
-        <van-button icon="star-o" type="primary" size="mini" color="#ed556a"
+        <van-button
+          icon="star-o"
+          type="primary"
+          size="mini"
+          color="#ed556a"
+          @click="about"
           >关注</van-button
         >
       </template>
@@ -119,9 +124,46 @@ export default {
         });
         this.$root.addCount = false;
       } else return;
+
+      let name = sessionStorage.getItem("username");
+
+      axios({
+        method: "post",
+        url: "http://localhost/person",
+        data: {
+          list: this.msg,
+          username: name,
+          type: "add",
+        },
+      }).then(() => {});
     },
+
+    //收藏功能
     collectNew(value) {
-      console.log(value);
+      let name = sessionStorage.getItem("username");
+      axios({
+        method: "post",
+        url: "http://localhost/person",
+        data: {
+          list: this.msg,
+          username: name,
+          type: "collect",
+        },
+      }).then(() => {});
+    },
+    //关注功能
+    about() {
+      let name = sessionStorage.getItem("username");
+
+      axios({
+        method: "post",
+        url: "http://localhost/person",
+        data: {
+          list: this.msg.author_name,
+          username: name,
+          type: "about",
+        },
+      }).then(() => {});
     },
   },
 };

@@ -19,7 +19,17 @@
           :key="index"
           :icon="item.icon"
           :text="item.type"
-        />
+          @click="showPopup"
+        >
+        </van-grid-item>
+
+        <van-popup
+          v-model="show"
+          position="left"
+          :style="{ width: '80%', height: '70%' }"
+          closeable
+        >
+        </van-popup>
       </van-grid>
     </div>
     <div class="button">
@@ -35,6 +45,7 @@ export default {
   props: {},
   data() {
     return {
+      show: false,
       name: "",
       //   type: [{"我的收藏",'star-o'}, {"我的点赞"}, "关注", "粉丝数", "获赞", "浏览记录"],
       style: [
@@ -57,6 +68,11 @@ export default {
   },
   updated() {},
   methods: {
+    //弹出层
+    showPopup() {
+      this.show = true;
+    },
+
     toNotify() {
       let router = this.$router;
 
@@ -86,6 +102,16 @@ export default {
 </script>
 
 <style scoped>
+.van-popup {
+  font-size: 16px;
+  align-items: center;
+}
+
+.van-popup p {
+  color: red;
+  text-indent: 5%;
+}
+
 .notice-swipe {
   height: 40px;
   line-height: 40px;

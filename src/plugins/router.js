@@ -3,16 +3,27 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Home from '@/layouts/Home.vue'
+
+const Home = () => import('../layouts/Home.vue')
+
+// import Home from '@/layouts/Home.vue'
 // import Reg from '@/components/user/reg.vue'
 // import Login from '@/components/user/login.vue'
-import Society from '@/layouts/Society.vue'
-import User from '@/layouts/User.vue'
-import Details from '@/layouts/Details.vue'
-import Money from '@/layouts/Money.vue'
-import Recreation from '@/layouts/Recreation.vue'
-import Inter from '@/layouts/Inter.vue'
-import Preson from '@/layouts/Preson.vue'
+const Society = () => import('../layouts/Society.vue')
+
+// import Society from '@/layouts/Society.vue'
+const User = () => import('../layouts/User.vue')
+// import User from '@/layouts/User.vue'
+const Details = () => import('../layouts/Details.vue')
+// import Details from '@/layouts/Details.vue'
+const Money = () => import('../layouts/Money.vue')
+// import Money from '@/layouts/Money.vue'
+const Recreation = () => import('../layouts/Recreation.vue')
+// import Recreation from '@/layouts/Recreation.vue'
+const Inter = () => import('../layouts/Inter.vue')
+// import Inter from '@/layouts/Inter.vue'
+const Preson = () => import('../layouts/Preson.vue')
+// import Preson from '@/layouts/Preson.vue'
 
 
 
@@ -39,7 +50,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
