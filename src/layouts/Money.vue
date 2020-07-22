@@ -19,13 +19,13 @@ export default {
   data() {
     return {
       newList: [],
-      count: 1,
+      count: 1
     };
   },
   components: {
     Banner,
     Content,
-    Paging,
+    Paging
   },
   created() {
     this.$root.state = "moneyNews";
@@ -46,13 +46,13 @@ export default {
 
     getNews() {
       axios({
-        url: "http://localhost/details/money",
-      }).then((data) => {
+        url: "/details/money"
+      }).then(data => {
         this.newList = data.data.advList;
         this.count = data.data.lastIndex;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

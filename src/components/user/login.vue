@@ -9,31 +9,13 @@
     />
     <p class="font">{{ this.$root.cut | reglogin }}</p>
     <van-form @submit="onSubmit">
-      <van-field
-        v-model="username"
-        name="用户名"
-        label="用户名"
-        placeholder="用户名"
-        autocomplete="off"
-      />
-      <van-field
-        v-model="password"
-        type="password"
-        name="密码"
-        label="密码"
-        placeholder="密码"
-      />
+      <van-field v-model="username" name="用户名" label="用户名" placeholder="测试用户名lcz" autocomplete="off" />
+      <van-field v-model="password" type="password" name="密码" label="密码" placeholder="测试密码110" />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">
-          登录
-        </van-button>
+        <van-button round block type="info" native-type="submit">登录</van-button>
       </div>
     </van-form>
-    <van-button
-      color="linear-gradient(to bottom, #4bb0ff, #6149f6)"
-      @click="turn"
-      >前去注册</van-button
-    >
+    <van-button color="linear-gradient(to bottom, #4bb0ff, #6149f6)" @click="turn">前去注册</van-button>
   </div>
 </template>
 
@@ -44,7 +26,7 @@ export default {
   data() {
     return {
       username: "",
-      password: "",
+      password: ""
     };
   },
   components: {},
@@ -56,23 +38,23 @@ export default {
         this.$notify({
           message: "请输入完整的账号密码",
           duration: 1500,
-          type: "warning",
+          type: "warning"
         });
       } else {
         axios({
           method: "post",
-          url: "http://localhost/user/login",
+          url: "/user/login",
           data: {
             username: this.username,
-            password: this.password,
-          },
-        }).then((data) => {
+            password: this.password
+          }
+        }).then(data => {
           if (data.data.ok == -3) {
             this.$notify({
               message: "账号或密码错误",
               duration: 1500,
               type: "danger",
-              className: "succTop",
+              className: "succTop"
             });
           }
           if (data.data.ok == 1) {
@@ -82,7 +64,7 @@ export default {
               message: "登录成功",
               duration: 1000,
               type: "success",
-              className: "succTop",
+              className: "succTop"
             });
             let route = this.$router;
             setTimeout(function() {
@@ -94,8 +76,8 @@ export default {
     },
     turn() {
       this.$root.cut = true;
-    },
-  },
+    }
+  }
 };
 </script>
 

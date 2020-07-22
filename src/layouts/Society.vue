@@ -46,7 +46,7 @@ export default {
 
     getNews() {
       axios({
-        url: "http://localhost/details/society",
+        url: "/details/society",
       }).then((data) => {
         this.newList = data.data.advList;
         this.count = data.data.lastIndex;

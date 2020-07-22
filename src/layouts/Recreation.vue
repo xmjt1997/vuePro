@@ -19,13 +19,13 @@ export default {
   data() {
     return {
       newList: [],
-      count: 1,
+      count: 1
     };
   },
   components: {
     Banner,
     Content,
-    Paging,
+    Paging
   },
   created() {
     this.$root.state = "yuleNews";
@@ -46,13 +46,13 @@ export default {
 
     getNews() {
       axios({
-        url: "http://localhost/details/recreation",
-      }).then((data) => {
+        url: "/details/recreation"
+      }).then(data => {
         this.newList = data.data.advList;
         this.count = data.data.lastIndex;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

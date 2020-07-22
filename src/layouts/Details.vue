@@ -7,26 +7,12 @@
     <van-cell value center>
       <!-- 使用 title 插槽来自定义标题 -->
       <template #title>
-        <van-image
-          round
-          width="0.8rem"
-          height="0.8rem"
-          src="https://img.yzcdn.cn/vant/cat.jpeg"
-        />
+        <van-image round width="0.8rem" height="0.8rem" src="https://img.yzcdn.cn/vant/cat.jpeg" />
         <van-tag plain type="success">原创</van-tag>
-        <span class="text" style="color: #ccc; font-size: 12px;">
-          {{ msg.author_name }}
-        </span>
+        <span class="text" style="color: #ccc; font-size: 12px;">{{ msg.author_name }}</span>
       </template>
       <template #right-icon>
-        <van-button
-          icon="star-o"
-          type="primary"
-          size="mini"
-          color="#ed556a"
-          @click="about"
-          >关注</van-button
-        >
+        <van-button icon="star-o" type="primary" size="mini" color="#ed556a" @click="about">关注</van-button>
       </template>
     </van-cell>
 
@@ -37,20 +23,11 @@
     <van-divider dashed>END</van-divider>
     <van-cell title="立即分享给好友吧" @click="showShare = true" />
 
-    <van-share-sheet
-      class="share"
-      v-model="showShare"
-      title="立即分享给好友"
-      :options="options"
-    />
+    <van-share-sheet class="share" v-model="showShare" title="立即分享给好友" :options="options" />
 
     <van-tabbar v-model="active">
-      <van-tabbar-item icon="good-job-o" @click="likeNew(msg.add)"
-        >点赞{{ msg.add }}</van-tabbar-item
-      >
-      <van-tabbar-item icon="star-o" @click="collectNew(msg.collect)"
-        >收藏{{ msg.collect }}</van-tabbar-item
-      >
+      <van-tabbar-item icon="good-job-o" @click="likeNew(msg.add)">点赞{{ msg.add }}</van-tabbar-item>
+      <van-tabbar-item icon="star-o" @click="collectNew(msg.collect)">收藏{{ msg.collect }}</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -71,18 +48,18 @@ export default {
         [
           { name: "微信", icon: "wechat" },
           { name: "微博", icon: "weibo" },
-          { name: "QQ", icon: "qq" },
+          { name: "QQ", icon: "qq" }
         ],
         [
           { name: "复制链接", icon: "link" },
           { name: "分享海报", icon: "poster" },
-          { name: "二维码", icon: "qrcode" },
-        ],
-      ],
+          { name: "二维码", icon: "qrcode" }
+        ]
+      ]
     };
   },
   components: {
-    Goback,
+    Goback
   },
   created() {
     this.$root.showH = false;
@@ -96,15 +73,14 @@ export default {
     //获取新闻页面信息
     show() {
       axios({
-        url: "http://localhost/news",
+        url: "/news",
         params: {
           type: this.$root.state,
-          _id: this.$root.newId,
+          _id: this.$root.newId
           // type: sessionStorage.getItem("state"),
           // _id: sessionStorage.getItem("newList"),
-          date: Date(),
-        },
-      }).then((data) => {
+        }
+      }).then(data => {
         this.msg = data.data[0];
       });
     },
@@ -115,12 +91,12 @@ export default {
         this.msg.add++;
         axios({
           method: "put",
-          url: "http://localhost/update/add",
+          url: "/update/add",
           params: {
             num: value,
             type: this.$root.state,
-            _id: this.$root.newId,
-          },
+            _id: this.$root.newId
+          }
         });
         this.$root.addCount = false;
       } else return;
@@ -129,12 +105,12 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost/person",
+        url: "/person",
         data: {
           list: this.msg,
           username: name,
-          type: "add",
-        },
+          type: "add"
+        }
       }).then(() => {});
     },
 
@@ -143,12 +119,12 @@ export default {
       let name = sessionStorage.getItem("username");
       axios({
         method: "post",
-        url: "http://localhost/person",
+        url: "/person",
         data: {
           list: this.msg,
           username: name,
-          type: "collect",
-        },
+          type: "collect"
+        }
       }).then(() => {});
     },
     //关注功能
@@ -157,15 +133,15 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost/person",
+        url: "/person",
         data: {
           list: this.msg.author_name,
           username: name,
-          type: "about",
-        },
+          type: "about"
+        }
       }).then(() => {});
-    },
-  },
+    }
+  }
 };
 </script>
 
